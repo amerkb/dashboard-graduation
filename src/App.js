@@ -1,7 +1,6 @@
 import './App.css';
 import { BrowserRouter } from 'react-router-dom';
 import AppContent from "./AppContent"
-import ScrollToTop from './lib/utils/ScrollTop';
 import { Toaster } from 'react-hot-toast';
 import { createTheme } from '@mui/material';
 import { ThemeProvider } from '@emotion/react';
@@ -27,7 +26,6 @@ function App() {
 
       <BrowserRouter>
         <Toaster />
-        <ScrollToTop />
         <ThemeProvider theme={theme}>
           <AppContent />
         </ThemeProvider>
