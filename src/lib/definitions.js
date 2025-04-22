@@ -4,9 +4,10 @@ import { MdAccessTimeFilled, MdOutlineWork } from 'react-icons/md';
 import { PiExamFill, PiStudentBold } from 'react-icons/pi';
 
 const requestJoinColumns = [
-    { id: 'name', label: 'الاسم', },
-    { id: 'calories', label: 'الرقم الوطني', },
-    { id: 'fat', label: 'الصورة', },
+    { id: 'id', label: 'المعرف', },
+    { id: 'full_name', label: 'الاسم', },
+    { id: 'university_number', label: 'الرقم الوطني', },
+    { id: 'image', label: 'الصورة', image: true },
 
 ];
 const modelsColumns = [
@@ -135,15 +136,7 @@ const navigationItems = [
     { hr: "dd" },
     { static: "الأساسيات " },
     { icon: <FaHome />, text: "الداشبورد", to: "/" },
-    {
-        icon: <PiStudentBold />
-        ,
-        text: "الطلاب",
-        subItems: [
-            { icon: <PiStudentBold />, text: "الطلاب", to: "/brands" },
-            { icon: <FaCodePullRequest />, text: "طلابات الانضمام", to: "/addBrands" }
-        ]
-    },
+    { icon: <PiStudentBold />, text: "الطلاب", to: "/students" },
     { hr: "dd" },
     { static: " الاعلانات وفرص العمل " },
 

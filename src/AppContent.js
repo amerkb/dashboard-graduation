@@ -22,16 +22,16 @@ export default function AppContent() {
         }
     };
 
-    useEffect(() => {
+    // useEffect(() => {
 
-        window.addEventListener('resize', handleResize);
+    //     window.addEventListener('resize', handleResize);
 
-        handleResize();
+    //     handleResize();
 
-        return () => {
-            window.removeEventListener('resize', handleResize);
-        };
-    }, []);
+    //     return () => {
+    //         window.removeEventListener('resize', handleResize);
+    //     };
+    // }, []);
 
     useEffect(() => {
         const contentElement = document.querySelector('.content');

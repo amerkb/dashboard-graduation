@@ -58,7 +58,7 @@ export default function Sidebar({ isOpen, toggleSidebar }) {
                                     {item.static}
                                 </span>
                             </div>
-                                 )
+                        )
                             : item.hr ?
                                 (
 
@@ -112,9 +112,9 @@ export default function Sidebar({ isOpen, toggleSidebar }) {
                                                                 transition={{ delay: 0.1 * subIndex }}
                                                             >
                                                                 <SidebarItem
-                                                                    icon={subItem.icon}  // Changed from item.icon to subItem.icon
-                                                                    text={subItem.text}  // Changed from item.text to subItem.text
-                                                                    to={subItem.to}      // Changed from item.to to subItem.to
+                                                                    icon={subItem.icon}  
+                                                                    text={subItem.text}  
+                                                                    to={subItem.to}      
                                                                     isOpen={isOpen}
                                                                     nested={true}
                                                                 />
@@ -171,9 +171,7 @@ function SidebarItem({ icon, text, to, isOpen, hasDropdown, isOpenDropdown, nest
                 }`}
 
         >
-            <span className={`transform transition-transform duration-300
-                            ${isActive ? 'text-black/70 scale-110' : 'text-orange group-hover:text-orange'}
-
+            <span className={`transform transition-transform duration-300 text-white font-bold
              ${location.pathname === to
                     ? "text-black/70 scale-110"
                     : "text-white group-hover:scale-110"

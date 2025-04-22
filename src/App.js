@@ -9,30 +9,29 @@ import { ThemeProvider } from '@emotion/react';
 
 function App() {
   const theme = createTheme({
-    // Customize your theme here
     palette: {
       primary: {
-        main: '#7d224b', // Default primary color
+        main: '#7d224b',
       },
       secondary: {
-        main: '#9c27b0', // Default secondary color
+        main: '#9c27b0',
       },
     },
     typography: {
-      fontFamily: 'Roboto, Arial, sans-serif', // Default font family
+      fontFamily: 'Roboto, Arial, sans-serif',
     },
-    spacing: 8, // Default spacing unit (used for margins, paddings, etc.)
+    spacing: 8,
   });
   return (
     <div className="font-cairo overflow-hidden" >
 
-        <BrowserRouter>
-          {/* <Toaster/>
-          <ScrollToTop/> */}
-          <ThemeProvider theme={theme}>
+      <BrowserRouter>
+        <Toaster />
+        <ScrollToTop />
+        <ThemeProvider theme={theme}>
           <AppContent />
         </ThemeProvider>
-        </BrowserRouter>
+      </BrowserRouter>
 
     </div>
   );
