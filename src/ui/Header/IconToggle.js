@@ -1,5 +1,5 @@
-import React from "react";
-import { useSelector, useDispatch } from "react-redux";
+import React from 'react';
+import { useSelector, useDispatch } from 'react-redux';
 // import SetElementSidebarReducer, {
 //   setTOGGLE,
 // } from "../../Redux/SidebarReducer";
@@ -11,18 +11,18 @@ const IconToggle = () => {
   // };
   return (
     <div
-      className={`w-[22px] cursor-pointer ${true ? "hidden md:block" : ""}`}
+      className={`w-[22px] cursor-pointer ${true ? 'hidden md:block' : ''}`}
       // onClick={handleClick}
     >
       <div className="w-full h-[2px] mb-[4px] bg-main"></div>
       <div
         className={`h-[2px] mb-[4px] bg-main duration-300 ${
-          true ? "w-3/4" : "w-full"
+          true ? 'w-3/4' : 'w-full'
         }`}
       ></div>
       <div
         className={`h-[2px] mb-[4px] bg-main duration-300 ${
-          true ? "w-1/2" : "w-full"
+          true ? 'w-1/2' : 'w-full'
         }`}
       ></div>
     </div>

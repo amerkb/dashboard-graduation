@@ -1,10 +1,10 @@
-import React, { useEffect, useRef, useState } from "react";
-import { IoPersonOutline } from "react-icons/io5";
-import { motion } from "framer-motion";
+import React, { useEffect, useRef, useState } from 'react';
+import { IoPersonOutline } from 'react-icons/io5';
+import { motion } from 'framer-motion';
 
 const Profile = () => {
   const [open, setOpen] = useState(false);
-  const userData = JSON.parse(localStorage.getItem("user"));
+  const userData = JSON.parse(localStorage.getItem('user'));
   const dropdownRef = useRef(null);
 
   useEffect(() => {
@@ -13,8 +13,8 @@ const Profile = () => {
         setOpen(false);
       }
     };
-    document.addEventListener("mousedown", handleClickOutside);
-    return () => document.removeEventListener("mousedown", handleClickOutside);
+    document.addEventListener('mousedown', handleClickOutside);
+    return () => document.removeEventListener('mousedown', handleClickOutside);
   }, []);
 
   return (
@@ -42,7 +42,7 @@ const Profile = () => {
           <button
             className="w-full text-left px-4 py-2 text-red-600 hover:bg-gray-100 rounded"
             onClick={() => {
-              localStorage.removeItem("user");
+              localStorage.removeItem('user');
               window.location.reload();
             }}
           >

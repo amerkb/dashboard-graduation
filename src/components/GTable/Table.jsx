@@ -14,7 +14,7 @@ const StyledTableCell = styled(TableCell)(({ theme }) => ({
   [`&.${tableCellClasses.head}`]: {
     backgroundColor: theme.palette.primary.main,
     color: theme.palette.common.white,
-    fontWeight: "bold",
+    fontWeight: 'bold',
   },
   [`&.${tableCellClasses.body}`]: {
     fontSize: 14,
@@ -47,12 +47,15 @@ export default function CustomTable({ headers, rows, rowKey, action }) {
   return (
     <>
       {/* Table */}
-      <TableContainer sx={{
-        my: 3,
-        boxShadow: 3,
-        borderRadius: 2,
-        overflow: "hidden"
-      }} component={Paper}>
+      <TableContainer
+        sx={{
+          my: 3,
+          boxShadow: 3,
+          borderRadius: 2,
+          overflow: 'hidden',
+        }}
+        component={Paper}
+      >
         <Table sx={{ minWidth: 700 }} aria-label="customized table">
           <TableHead>
             <TableRow>
@@ -76,7 +79,7 @@ export default function CustomTable({ headers, rows, rowKey, action }) {
                   >
                     {header.image ? (
                       <img
-                        className='w-16 h-16 m-auto rounded-lg cursor-pointer  '
+                        className="w-16 h-16 m-auto rounded-lg cursor-pointer  "
                         src={row[header.id]}
                         alt={header.label}
                         onClick={() => handleOpen(row[header.id])}

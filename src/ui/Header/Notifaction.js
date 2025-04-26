@@ -1,20 +1,24 @@
-import React, { useEffect, useRef, useState } from "react";
-import { IoIosNotifications } from "react-icons/io";
+import React, { useEffect, useRef, useState } from 'react';
+import { IoIosNotifications } from 'react-icons/io';
 
 const Notification = () => {
   const [open, setOpen] = useState(false);
-  const notifications = ["New message from John", "Your order has been shipped", "Update your profile"];
-  const dropdownRef = useRef(null); 
+  const notifications = [
+    'New message from John',
+    'Your order has been shipped',
+    'Update your profile',
+  ];
+  const dropdownRef = useRef(null);
 
   useEffect(() => {
     const handleClickOutside = (event) => {
       if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {
-        setOpen(false); 
+        setOpen(false);
       }
     };
-    document.addEventListener("mousedown", handleClickOutside);
+    document.addEventListener('mousedown', handleClickOutside);
     return () => {
-      document.removeEventListener("mousedown", handleClickOutside);
+      document.removeEventListener('mousedown', handleClickOutside);
     };
   }, []);
 
@@ -30,7 +34,9 @@ const Notification = () => {
       <ul
         className={`absolute bg-white shadow-lg rounded-lg text-gray-600 right-3 mt-2 w-64 z-50
           transform transition-all duration-300 ease-in-out ${
-            open ? "scale-100 opacity-100" : "scale-75 opacity-0 pointer-events-none"
+            open
+              ? 'scale-100 opacity-100'
+              : 'scale-75 opacity-0 pointer-events-none'
           }`}
       >
         {/* Header */}

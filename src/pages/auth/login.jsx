@@ -1,9 +1,9 @@
-import React, { useEffect } from "react";
-import university from "../../Assests/university.jpg";
-import Logo from "../../Assests/Logo.png";
+import React, { useEffect } from 'react';
+import university from '../../Assests/university.jpg';
+import Logo from '../../Assests/Logo.png';
 // import AOS from "aos";
-import { MdEmail } from "react-icons/md";
-import { RiLockPasswordFill } from "react-icons/ri";
+import { MdEmail } from 'react-icons/md';
+import { RiLockPasswordFill } from 'react-icons/ri';
 
 const SignIn = () => {
   // useEffect(() => {
@@ -24,9 +24,7 @@ const SignIn = () => {
         dir="rtl"
       >
         {/* Logo */}
-        <div
-          data-aos="zoom-in"
-          className="mb-8 flex justify-center">
+        <div data-aos="zoom-in" className="mb-8 flex justify-center">
           <img src={Logo} alt="University Logo" className="w-60" />
         </div>
 
@@ -34,7 +32,6 @@ const SignIn = () => {
         <h2 className="mb-2 text-center text-3xl font-bold text-gray-900">
           تسجيل الدخول
         </h2>
-
 
         {/* Email */}
         <div className="mb-4">
@@ -74,7 +71,6 @@ const SignIn = () => {
             />
             <span className="absolute inset-y-0 right-3 flex items-center text-gray-400">
               <RiLockPasswordFill />
-
             </span>
           </div>
         </div>

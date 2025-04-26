@@ -1,12 +1,14 @@
 import React from 'react';
 
 const Pagination = ({ currentPage, totalPages, handleChangePage }) => {
-  
   const renderPageNumbers = () => {
     const pageNumbers = [];
-    const maxVisibleButtons = 3; 
+    const maxVisibleButtons = 3;
 
-    let startPage = Math.max(currentPage - Math.floor(maxVisibleButtons / 2), 1);
+    let startPage = Math.max(
+      currentPage - Math.floor(maxVisibleButtons / 2),
+      1,
+    );
     let endPage = Math.min(startPage + maxVisibleButtons - 1, totalPages);
 
     if (endPage - startPage + 1 < maxVisibleButtons) {
@@ -28,7 +30,7 @@ const Pagination = ({ currentPage, totalPages, handleChangePage }) => {
           }}
         >
           {i}
-        </button>
+        </button>,
       );
     }
 
@@ -51,7 +53,9 @@ const Pagination = ({ currentPage, totalPages, handleChangePage }) => {
         )}
         {startPage > 2 && <span style={{ margin: '0 4px' }}>...</span>}
         {pageNumbers}
-        {endPage < totalPages - 1 && <span style={{ margin: '0 4px' }}>...</span>}
+        {endPage < totalPages - 1 && (
+          <span style={{ margin: '0 4px' }}>...</span>
+        )}
         {endPage < totalPages && (
           <button
             onClick={() => handleChangePage(totalPages)}

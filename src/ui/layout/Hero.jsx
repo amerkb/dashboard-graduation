@@ -1,6 +1,5 @@
 import React from 'react';
-import HeroPhoto from "../../Assests/top-head.png";
-
+import HeroPhoto from '../../Assests/top-head.png';
 
 const SimpleTable = () => {
   return (
@@ -10,8 +9,8 @@ const SimpleTable = () => {
           className="relative py-10 bg-gradient-to-r  from-blue-500 via-blue-600 to-blue-700 rounded-sm shadow-lg"
           style={{
             backgroundImage: `url(${HeroPhoto})`,
-            backgroundSize: "cover",
-            backgroundPosition: "center",
+            backgroundSize: 'cover',
+            backgroundPosition: 'center',
           }}
         >
           <div className="absolute inset-0 bg-black bg-opacity-30 rounded-b-lg"></div>
@@ -26,7 +25,6 @@ const SimpleTable = () => {
             </div>
           </div>
         </div>
-
       </div>
     </div>
   );
