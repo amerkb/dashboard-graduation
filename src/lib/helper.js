@@ -52,7 +52,10 @@ export const Helper = {
         return response;
       })
       .catch((error) => {
-        return error;
+        if (error.response) {
+          throw error.response;
+        }
+        throw error;
       });
   },
   Put: async ({ url, data = null }) => {

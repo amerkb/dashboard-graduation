@@ -11,6 +11,12 @@ import AddJobOpportunityPage from '../pages/JobOpportunity/AddJobOpportunityPage
 import JobOpportunityList from '../pages/JobOpportunity/JobOpportunityList.jsx';
 import JobOpportunityDetail from '../pages/JobOpportunity/JobOpportunityDetail.jsx';
 import EditJobOpportunityPage from '../pages/JobOpportunity/EditJobOpportunity.jsx';
+import WorkScheduleTablePage from '../pages/WorkSchedule/WorkScheduleTablePage';
+import AcademicYearsPage from '../pages/AcademicYear/AcademicYearsPage.jsx';
+import WorkScheduleAddPage from '../pages/WorkSchedule/WorkScheduleAddPage.jsx';
+import ExamScheduleTable from '../components/Exam/ExamScheduleTable.jsx';
+import ExamSchedulePage from '../pages/Exam/ExamSchedulePage.jsx';
+import ExamScheduleAddPage from '../pages/Exam/ExamScheduleAddPage.jsx';
 
 export default function ApplicationRoutes() {
   return (
@@ -31,6 +37,13 @@ export default function ApplicationRoutes() {
         path="/jobOpportunity/edit/:id"
         element={<EditJobOpportunityPage />}
       />
+
+      <Route path="/academicYears" element={<AcademicYearsPage />} />
+      <Route path="/workSchedules" element={<WorkScheduleTablePage />} />
+      <Route path="/workSchedules/add" element={<WorkScheduleAddPage />} />
+
+      <Route path="/examSchedules" element={<ExamSchedulePage />} />
+      <Route path="/examSchedules/add" element={<ExamScheduleAddPage />} />
     </Routes>
   );
 }

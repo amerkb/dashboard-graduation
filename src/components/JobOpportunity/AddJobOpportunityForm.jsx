@@ -51,13 +51,14 @@ const JobOpportunityForm = ({ editMode = false, defaultData = null }) => {
 
   const [images, setImages] = useState([]);
   const [existingImages, setExistingImages] = useState([]);
-  const [previewImageIndex, setPreviewImageIndex] = useState(null); // 👈 بدلاً من صورة واحدة، نخزن رقم الصورة
+  const [previewImageIndex, setPreviewImageIndex] = useState(null);
   const [snackbar, setSnackbar] = useState({
     open: false,
     message: '',
     severity: 'success',
   });
   const [loading, setLoading] = useState(false);
+  const [errors, setErrors] = useState({});
 
   useEffect(() => {
     if (editMode && defaultData) {
@@ -76,6 +77,17 @@ const JobOpportunityForm = ({ editMode = false, defaultData = null }) => {
     setForm({ ...form, [e.target.name]: e.target.value });
   };
 
+  const validateForm = () => {
+    const newErrors = {};
+    if (!form.title) newErrors.title = 'العنوان مطلوب';
+    if (!form.description) newErrors.description = 'الوصف مطلوب';
+    if (!form.company) newErrors.company = 'اسم الشركة مطلوب';
+    if (!form.location) newErrors.location = 'الموقع مطلوب';
+    if (!form.job_type) newErrors.job_type = 'نوع الفرصة مطلوب';
+    setErrors(newErrors);
+    return Object.keys(newErrors).length === 0;
+  };
+
   const handleImageChange = (e) => {
     const files = Array.from(e.target.files);
     setImages((prev) => [...prev, ...files]);
@@ -91,12 +103,20 @@ const JobOpportunityForm = ({ editMode = false, defaultData = null }) => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    const formData = new FormData();
+    if (!validateForm()) {
+      setSnackbar({
+        open: true,
+        message: '❌ يرجى ملء جميع الحقول المطلوبة',
+        severity: 'error',
+      });
+      return;
+    }
 
+    setLoading(true);
+    const formData = new FormData();
     Object.entries(form).forEach(([key, value]) => {
       if (value) formData.append(key, value);
     });
-
     images.forEach((img) => formData.append('images[]', img));
 
     if (editMode) {
@@ -122,13 +142,18 @@ const JobOpportunityForm = ({ editMode = false, defaultData = null }) => {
           severity: 'success',
         });
       }
-      setTimeout(() => navigate('/jobOpportunities'), 1000);
+
+      setTimeout(() => {
+        setLoading(false);
+        navigate('/jobOpportunities');
+      }, 1000);
     } catch (err) {
       setSnackbar({
         open: true,
         message: '❌ حدث خطأ أثناء الحفظ',
         severity: 'error',
       });
+      setLoading(false);
     }
   };
 
@@ -157,14 +182,6 @@ const JobOpportunityForm = ({ editMode = false, defaultData = null }) => {
     ];
   };
 
-  if (loading) {
-    return (
-      <Box display="flex" justifyContent="center" my={10}>
-        <CircularProgress />
-      </Box>
-    );
-  }
-
   return (
     <Paper
       elevation={6}
@@ -190,6 +207,8 @@ const JobOpportunityForm = ({ editMode = false, defaultData = null }) => {
             fullWidth
             value={form.title}
             onChange={handleChange}
+            error={Boolean(errors.title)}
+            helperText={errors.title}
           />
           <TextField
             label="الوصف"
@@ -199,6 +218,8 @@ const JobOpportunityForm = ({ editMode = false, defaultData = null }) => {
             rows={4}
             value={form.description}
             onChange={handleChange}
+            error={Boolean(errors.description)}
+            helperText={errors.description}
           />
           <TextField
             label="اسم الشركة"
@@ -206,6 +227,8 @@ const JobOpportunityForm = ({ editMode = false, defaultData = null }) => {
             fullWidth
             value={form.company}
             onChange={handleChange}
+            error={Boolean(errors.company)}
+            helperText={errors.company}
           />
           <TextField
             label="الموقع"
@@ -213,9 +236,11 @@ const JobOpportunityForm = ({ editMode = false, defaultData = null }) => {
             fullWidth
             value={form.location}
             onChange={handleChange}
+            error={Boolean(errors.location)}
+            helperText={errors.location}
           />
 
-          <FormControl fullWidth>
+          <FormControl fullWidth error={Boolean(errors.job_type)}>
             <InputLabel>نوع الفرصة</InputLabel>
             <Select
               name="job_type"
@@ -229,6 +254,11 @@ const JobOpportunityForm = ({ editMode = false, defaultData = null }) => {
                 </MenuItem>
               ))}
             </Select>
+            {errors.job_type && (
+              <Typography variant="caption" color="error">
+                {errors.job_type}
+              </Typography>
+            )}
           </FormControl>
 
           <Button
@@ -241,7 +271,6 @@ const JobOpportunityForm = ({ editMode = false, defaultData = null }) => {
             <input hidden multiple type="file" onChange={handleImageChange} />
           </Button>
 
-          {/* عرض جميع الصور */}
           <Grid container spacing={2}>
             {existingImages.map((img, idx) => (
               <Grid item xs={4} sm={3} md={2} key={`existing-${idx}`}>
@@ -316,13 +345,19 @@ const JobOpportunityForm = ({ editMode = false, defaultData = null }) => {
             fullWidth
             size="large"
             color="primary"
+            disabled={loading}
           >
-            {editMode ? '✅ تحديث الفرصة' : '✅ نشر الفرصة'}
+            {loading
+              ? editMode
+                ? '⏳ جاري تحديث الفرصة...'
+                : '⏳ جاري نشر الفرصة...'
+              : editMode
+                ? '✅ تحديث الفرصة'
+                : '✅ نشر الفرصة'}
           </Button>
         </Stack>
       </Box>
 
-      {/* مودال عرض الصور */}
       <Modal open={previewImageIndex !== null} onClose={closePreview}>
         <Box
           sx={{

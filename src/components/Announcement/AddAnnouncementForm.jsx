@@ -41,6 +41,8 @@ const AddAnnouncementForm = ({ editMode = false, defaultData = null }) => {
   const [existingImages, setExistingImages] = useState([]);
   const [previewIndex, setPreviewIndex] = useState(null);
   const [previewType, setPreviewType] = useState('existing');
+  const [loading, setLoading] = useState(false);
+  const [errors, setErrors] = useState({});
   const [snackbar, setSnackbar] = useState({
     open: false,
     message: '',
@@ -113,18 +115,35 @@ const AddAnnouncementForm = ({ editMode = false, defaultData = null }) => {
     }
   };
 
+  const validateForm = () => {
+    const newErrors = {};
+    if (!form.title) newErrors.title = 'العنوان مطلوب';
+    if (!form.description) newErrors.description = 'الوصف مطلوب';
+    if (!form.academic_year) newErrors.academic_year = 'السنة الدراسية مطلوبة';
+    if (!form.specialization) newErrors.specialization = 'الاختصاص مطلوب';
+    setErrors(newErrors);
+    return Object.keys(newErrors).length === 0;
+  };
+
   const handleSubmit = async (e) => {
     e.preventDefault();
-    const formData = new FormData();
+    if (!validateForm()) {
+      setSnackbar({
+        open: true,
+        message: '❌ يرجى ملء جميع الحقول المطلوبة',
+        severity: 'error',
+      });
+      return;
+    }
 
+    setLoading(true);
+    const formData = new FormData();
     Object.entries(form).forEach(([key, value]) => {
       if (value !== '') formData.append(key, value);
     });
-
     images.forEach((img) => {
       formData.append('images[]', img);
     });
-
     if (editMode) {
       formData.append('_method', 'post');
       existingImages.forEach((img) => {
@@ -148,7 +167,6 @@ const AddAnnouncementForm = ({ editMode = false, defaultData = null }) => {
           severity: 'success',
         });
       }
-
       setForm({
         title: '',
         description: '',
@@ -165,6 +183,8 @@ const AddAnnouncementForm = ({ editMode = false, defaultData = null }) => {
         message: '❌ حدث خطأ أثناء الإرسال',
         severity: 'error',
       });
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -193,6 +213,8 @@ const AddAnnouncementForm = ({ editMode = false, defaultData = null }) => {
             label="📌 عنوان الإعلان"
             value={form.title}
             onChange={handleChange}
+            error={Boolean(errors.title)}
+            helperText={errors.title}
             dir="rtl"
           />
           <TextField
@@ -203,12 +225,14 @@ const AddAnnouncementForm = ({ editMode = false, defaultData = null }) => {
             label="📝 وصف الإعلان"
             value={form.description}
             onChange={handleChange}
+            error={Boolean(errors.description)}
+            helperText={errors.description}
             dir="rtl"
           />
 
           <Grid container spacing={2}>
             <Grid item xs={12} md={6}>
-              <FormControl fullWidth>
+              <FormControl fullWidth error={Boolean(errors.academic_year)}>
                 <InputLabel>🎓 السنة الدراسية</InputLabel>
                 <Select
                   name="academic_year"
@@ -223,11 +247,16 @@ const AddAnnouncementForm = ({ editMode = false, defaultData = null }) => {
                   <MenuItem value="5">السنة الخامسة</MenuItem>
                   <MenuItem value="6">عام</MenuItem>
                 </Select>
+                {errors.academic_year && (
+                  <Typography variant="caption" color="error">
+                    {errors.academic_year}
+                  </Typography>
+                )}
               </FormControl>
             </Grid>
 
             <Grid item xs={12} md={6}>
-              <FormControl fullWidth>
+              <FormControl fullWidth error={Boolean(errors.specialization)}>
                 <InputLabel>🔧 الاختصاص</InputLabel>
                 <Select
                   name="specialization"
@@ -240,6 +269,11 @@ const AddAnnouncementForm = ({ editMode = false, defaultData = null }) => {
                   <MenuItem value="3">شبكات</MenuItem>
                   <MenuItem value="4">عام</MenuItem>
                 </Select>
+                {errors.specialization && (
+                  <Typography variant="caption" color="error">
+                    {errors.specialization}
+                  </Typography>
+                )}
               </FormControl>
             </Grid>
           </Grid>
@@ -249,7 +283,6 @@ const AddAnnouncementForm = ({ editMode = false, defaultData = null }) => {
             <input hidden multiple type="file" onChange={handleImageChange} />
           </Button>
 
-          {/* عرض الصور */}
           <Grid container spacing={2}>
             {existingImages.map((img, idx) => (
               <Grid item xs={4} sm={3} md={2} key={`existing-${idx}`}>
@@ -321,13 +354,19 @@ const AddAnnouncementForm = ({ editMode = false, defaultData = null }) => {
             color="primary"
             fullWidth
             size="large"
+            disabled={loading}
           >
-            {editMode ? '💾 تعديل الإعلان' : '📢 نشر الإعلان'}
+            {loading
+              ? editMode
+                ? '⏳ جاري تعديل الإعلان...'
+                : '⏳ جاري نشر الإعلان...'
+              : editMode
+                ? '💾 تعديل الإعلان'
+                : '📢 نشر الإعلان'}
           </Button>
         </Stack>
       </Box>
 
-      {/* Modal معاينة الصورة */}
       <Modal open={previewIndex !== null} onClose={closePreview}>
         <Box
           sx={{

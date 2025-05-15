@@ -1,6 +1,7 @@
 import { FaHome, FaPlusCircle, FaBuysellads } from 'react-icons/fa';
 import { MdOutlineWork, MdAccessTimeFilled } from 'react-icons/md';
 import { PiExamFill, PiStudentBold } from 'react-icons/pi';
+import { SiTransmission } from 'react-icons/si';
 
 const requestJoinColumns = [
   { id: 'id', label: 'المعرف' },
@@ -44,31 +45,36 @@ const navigationItems = [
   { hr: 'dd' },
   { static: '   برامج الامتحانات و الدوام ' },
   {
-    icon: <PiExamFill />,
-    text: 'برامج الامتحانات',
-    subItems: [
-      { icon: <PiExamFill />, text: ' برامج الامتحانات', to: '/stores' },
-      { icon: <FaPlusCircle />, text: 'إضافة برنامج', to: '/addstores' },
-    ],
-  },
-  {
     icon: <MdAccessTimeFilled />,
-    text: ' برامج الدوام',
+    text: 'برامج الامتحانات و الدوام',
     subItems: [
-      { icon: <MdAccessTimeFilled />, text: ' برامج الدوام', to: '/stores' },
-      { icon: <FaPlusCircle />, text: 'إضافة برنامج', to: '/addstores' },
+      {
+        icon: <MdAccessTimeFilled />,
+        text: 'إدارة السنوات',
+        to: '/academicYears',
+      },
+      {
+        icon: <FaPlusCircle />,
+        text: 'إضافة برنامج دوام',
+        to: '/workSchedules/add',
+      },
+      {
+        icon: <FaPlusCircle />,
+        text: 'إضافة برنامج إمتحان',
+        to: '/examSchedules/add',
+      },
     ],
   },
   { hr: 'dd' },
-
-  // {
-  //     icon: <SiTransmission />,
-  //     text: "المفقودات",
-  //     subItems: [
-  //         { icon: <SiTransmission />, text: " المفقودات", to: "/stores" },
-  //         { icon: <FaPlusCircle />, text: "إضافة المفقودات", to: "/addstores" }
-  //     ]
-  // },
+  { static: 'المفقودات' },
+  {
+    icon: <SiTransmission />,
+    text: 'المفقودات',
+    subItems: [
+      { icon: <SiTransmission />, text: ' المفقودات', to: '/stores' },
+      { icon: <FaPlusCircle />, text: 'إضافة المفقودات', to: '/addstores' },
+    ],
+  },
 ];
 
 export { requestJoinColumns, navigationItems };
