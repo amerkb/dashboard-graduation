@@ -14,9 +14,10 @@ import EditJobOpportunityPage from '../pages/JobOpportunity/EditJobOpportunity.j
 import WorkScheduleTablePage from '../pages/WorkSchedule/WorkScheduleTablePage';
 import AcademicYearsPage from '../pages/AcademicYear/AcademicYearsPage.jsx';
 import WorkScheduleAddPage from '../pages/WorkSchedule/WorkScheduleAddPage.jsx';
-import ExamScheduleTable from '../components/Exam/ExamScheduleTable.jsx';
 import ExamSchedulePage from '../pages/Exam/ExamSchedulePage.jsx';
 import ExamScheduleAddPage from '../pages/Exam/ExamScheduleAddPage.jsx';
+import LostItemsPage from '../pages/LostItems/LostItemsPage.jsx';
+import LostItemDetailsPage from '../pages/LostItems/LostItemDetailsPage.jsx';
 
 export default function ApplicationRoutes() {
   return (
@@ -44,6 +45,9 @@ export default function ApplicationRoutes() {
 
       <Route path="/examSchedules" element={<ExamSchedulePage />} />
       <Route path="/examSchedules/add" element={<ExamScheduleAddPage />} />
+
+      <Route path="/lostItems" element={<LostItemsPage />} />
+      <Route path="/showLostItem/:id" element={<LostItemDetailsPage />} />
     </Routes>
   );
 }

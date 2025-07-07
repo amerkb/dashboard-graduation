@@ -71,8 +71,7 @@ const navigationItems = [
     icon: <SiTransmission />,
     text: 'المفقودات',
     subItems: [
-      { icon: <SiTransmission />, text: ' المفقودات', to: '/stores' },
-      { icon: <FaPlusCircle />, text: 'إضافة المفقودات', to: '/addstores' },
+      { icon: <SiTransmission />, text: 'إدارة المفقودات', to: '/lostItems' },
     ],
   },
 ];
