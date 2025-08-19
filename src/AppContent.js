@@ -49,7 +49,7 @@ export default function AppContent() {
         <Sidebar isOpen={isSidebarOpen} toggleSidebar={toggleSidebar} />
       )}
       <div className="content h-screen overflow-auto w-[100%] bg-[#f3f4f9]  relative">
-        {!isLoginPage && <Header />}
+        {!isLoginPage && <Header toggleSidebar={toggleSidebar} />}
         {!isLoginPage && <Hero />}
         <ApplicationRoutes />
       </div>

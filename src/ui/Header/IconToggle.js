@@ -1,29 +1,33 @@
-import React from 'react';
-import { useSelector, useDispatch } from 'react-redux';
-// import SetElementSidebarReducer, {
-//   setTOGGLE,
-// } from "../../Redux/SidebarReducer";
-const IconToggle = () => {
-  // const toggle = useSelector((state) => state.Sidebar.toggle);
-  // const dispatch = useDispatch();
-  // const handleClick = () => {
-  //   dispatch(setTOGGLE(!toggle));
-  // };
+import { useState } from "react";
+
+const IconToggle = ({ onClick }) => {
+  const [open, setOpen] = useState(false);
+
+  const handleClick = () => {
+    if (onClick) onClick(); // استدعاء الفنكشن الجاي من الأب
+  };
+
   return (
     <div
-      className={`w-[22px] cursor-pointer ${true ? 'hidden md:block' : ''}`}
-      // onClick={handleClick}
+      onClick={handleClick}
+      className="w-[22px] cursor-pointer md:block"
     >
-      <div className="w-full h-[2px] mb-[4px] bg-main"></div>
+      {/* الخط الأول */}
       <div
-        className={`h-[2px] mb-[4px] bg-main duration-300 ${
-          true ? 'w-3/4' : 'w-full'
-        }`}
+        className={`w-full h-[2px] mb-[4px] bg-main transition-all duration-300
+          ${open ? "rotate-45 translate-y-[6px]" : ""}`}
       ></div>
+
+      {/* الخط الثاني */}
       <div
-        className={`h-[2px] mb-[4px] bg-main duration-300 ${
-          true ? 'w-1/2' : 'w-full'
-        }`}
+        className={`h-[2px] mb-[4px] bg-main transition-all duration-300
+          ${open ? "opacity-0" : "w-3/4"}`}
+      ></div>
+
+      {/* الخط الثالث */}
+      <div
+        className={`h-[2px] bg-main transition-all duration-300
+          ${open ? "-rotate-45 -translate-y-[6px]" : "w-1/2"}`}
       ></div>
     </div>
   );
