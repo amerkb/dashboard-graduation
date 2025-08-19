@@ -50,7 +50,7 @@ const AnnouncementList = () => {
       </Typography>
 
       {loading ? (
-        <Box display="flex" justifyContent="center" mt={5}>
+          <Box display="flex" justifyContent="center" my={10} p={10}>
           <CircularProgress />
         </Box>
       ) : error ? (

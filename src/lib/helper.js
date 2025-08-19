@@ -4,7 +4,7 @@ export const AUTH_TOKEN_KEY = "auth_token";
 export const AUTH_USER_KEY  = "auth_user";
 
 const instance = axios.create({
-  baseURL: 'http://127.0.0.1:8000/api',
+  baseURL: 'http://89.116.23.191/api',
   timeout: 95000,
   headers: {
     'X-Custom-Header': 'foobar',

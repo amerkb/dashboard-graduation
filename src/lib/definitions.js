@@ -9,6 +9,12 @@ const requestJoinColumns = [
   { id: 'university_number', label: 'الرقم الوطني' },
   { id: 'image', label: 'الصورة', image: true },
 ];
+const hateMessage = [
+  { id: 'id', label: 'المعرف' },
+  { id: 'full_name', label: 'الرسالة' },
+  { id: 'image', label: 'الطالب', image: true },
+  { id: 'university_number', label: ' المجموعة' },
+];
 
 const navigationItems = [
   { hr: 'dd' },
@@ -76,4 +82,4 @@ const navigationItems = [
   },
 ];
 
-export { requestJoinColumns, navigationItems };
+export { requestJoinColumns, navigationItems,hateMessage };
