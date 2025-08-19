@@ -1,5 +1,8 @@
 import axios from 'axios';
 
+export const AUTH_TOKEN_KEY = "auth_token";
+export const AUTH_USER_KEY  = "auth_user";
+
 const instance = axios.create({
   baseURL: 'http://127.0.0.1:8000/api',
   timeout: 95000,
@@ -10,10 +13,10 @@ const instance = axios.create({
 
 instance.interceptors.request.use(
   (config) => {
-    const token = localStorage.getItem('user');
+    const token = localStorage.getItem(AUTH_TOKEN_KEY);
     if (token) {
     }
-    config.headers.Authorization = `Bearer 22|laravel_sanctum_Bmq35FhcsxC1Nwhrm3lISX4xwa7Xq5lBVE293Mje74733f58`;
+    config.headers.Authorization = `Bearer ${token}`;
     return config;
   },
   (error) => {
