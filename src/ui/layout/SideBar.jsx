@@ -25,7 +25,7 @@ export default function Sidebar({ isOpen, toggleSidebar }) {
           width: isOpen ? '260px' : '80px',
           boxShadow: '4px 0 15px rgba(0, 0, 0, 0.1)',
         }}
-        className="bg-main h-screen max-h-screen p-4 fixed overflow-y-auto transition-[width] duration-300 ease-in-out"
+        className=" bg-gradient-to-t from-[#7d224b] to-[#5b1638] h-screen max-h-screen p-4 fixed overflow-y-auto transition-[width] duration-300 ease-in-out"
         style={{ backdropFilter: 'blur(10px)' }}
       >
         <div className="flex  items-center justify-between mb-3">

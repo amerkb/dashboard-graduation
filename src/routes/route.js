@@ -22,7 +22,7 @@ import LostItemDetailsPage from '../pages/LostItems/LostItemDetailsPage.jsx';
 export default function ApplicationRoutes() {
   return (
     <Routes>
-      <Route path="/" element={<Statistics />} />
+      <Route path="/" element={<Container content={<Statistics />} />} />
       <Route path="/students" element={<Container content={<Students />} />} />
       <Route path="/login" element={<LoginPage />} />
 

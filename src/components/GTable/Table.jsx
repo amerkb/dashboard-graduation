@@ -60,11 +60,11 @@ export default function CustomTable({ headers, rows, rowKey, action }) {
           <TableHead>
             <TableRow>
               {headers.map((header) => (
-                <StyledTableCell key={header.id} align="center">
+                <StyledTableCell key={header.id} className='bg-gradient-to-t from-[#7d224b] to-[#5b1638] ' align="center">
                   {header.label}
                 </StyledTableCell>
               ))}
-              <StyledTableCell align="center">الخيارات</StyledTableCell>
+              {action && <StyledTableCell className='bg-gradient-to-t from-[#7d224b] to-[#5b1638] ' align="center">الخيارات</StyledTableCell>}
             </TableRow>
           </TableHead>
           <TableBody>
@@ -89,9 +89,9 @@ export default function CustomTable({ headers, rows, rowKey, action }) {
                     )}
                   </StyledTableCell>
                 ))}
-                <StyledTableCell align="center">
-                  {action && action(row)}
-                </StyledTableCell>
+                {action && <StyledTableCell align="center">
+                  {action(row)}
+                </StyledTableCell>}
               </StyledTableRow>
             ))}
           </TableBody>
