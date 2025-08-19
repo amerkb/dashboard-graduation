@@ -1,4 +1,4 @@
-import { Route, Routes } from 'react-router-dom';
+import { Route, Routes, Outlet } from 'react-router-dom';
 import LoginPage from '../pages/auth/login';
 import Students from '../pages/students/index.jsx';
 import Statistics from '../pages/statistics/index.jsx';
@@ -19,35 +19,39 @@ import ExamScheduleAddPage from '../pages/Exam/ExamScheduleAddPage.jsx';
 import LostItemsPage from '../pages/LostItems/LostItemsPage.jsx';
 import LostItemDetailsPage from '../pages/LostItems/LostItemDetailsPage.jsx';
 
+function ContainerLayout() {
+  return <Container content={<Outlet />} />;
+}
+
 export default function ApplicationRoutes() {
   return (
     <Routes>
-      <Route path="/" element={<Container content={<Statistics />} />} />
-      <Route path="/students" element={<Container content={<Students />} />} />
       <Route path="/login" element={<LoginPage />} />
 
-      <Route path="/announcements/add" element={<AddAnnouncementPage />} />
-      <Route path="/announcements" element={<AnnouncementList />} />
-      <Route path="/announcement/:id" element={<AnnouncementDetailsPage />} />
-      <Route path="/announcement/edit/:id" element={<EditAnnouncementPage />} />
+      <Route element={<ContainerLayout />}>
+        <Route path="/" element={<Statistics />} />
+        <Route path="/students" element={<Students />} />
 
-      <Route path="/jobOpportunity/add" element={<AddJobOpportunityPage />} />
-      <Route path="/jobOpportunities" element={<JobOpportunityList />} />
-      <Route path="/jobOpportunity/:id" element={<JobOpportunityDetail />} />
-      <Route
-        path="/jobOpportunity/edit/:id"
-        element={<EditJobOpportunityPage />}
-      />
+        <Route path="/announcements/add" element={<AddAnnouncementPage />} />
+        <Route path="/announcements" element={<AnnouncementList />} />
+        <Route path="/announcement/:id" element={<AnnouncementDetailsPage />} />
+        <Route path="/announcement/edit/:id" element={<EditAnnouncementPage />} />
 
-      <Route path="/academicYears" element={<AcademicYearsPage />} />
-      <Route path="/workSchedules" element={<WorkScheduleTablePage />} />
-      <Route path="/workSchedules/add" element={<WorkScheduleAddPage />} />
+        <Route path="/jobOpportunity/add" element={<AddJobOpportunityPage />} />
+        <Route path="/jobOpportunities" element={<JobOpportunityList />} />
+        <Route path="/jobOpportunity/:id" element={<JobOpportunityDetail />} />
+        <Route path="/jobOpportunity/edit/:id" element={<EditJobOpportunityPage />} />
 
-      <Route path="/examSchedules" element={<ExamSchedulePage />} />
-      <Route path="/examSchedules/add" element={<ExamScheduleAddPage />} />
+        <Route path="/academicYears" element={<AcademicYearsPage />} />
+        <Route path="/workSchedules" element={<WorkScheduleTablePage />} />
+        <Route path="/workSchedules/add" element={<WorkScheduleAddPage />} />
 
-      <Route path="/lostItems" element={<LostItemsPage />} />
-      <Route path="/showLostItem/:id" element={<LostItemDetailsPage />} />
+        <Route path="/examSchedules" element={<ExamSchedulePage />} />
+        <Route path="/examSchedules/add" element={<ExamScheduleAddPage />} />
+
+        <Route path="/lostItems" element={<LostItemsPage />} />
+        <Route path="/showLostItem/:id" element={<LostItemDetailsPage />} />
+      </Route>
     </Routes>
   );
 }
