@@ -1,13 +1,13 @@
-import { FaUsers } from 'react-icons/fa6';
+import { FaMessage, FaUsers } from 'react-icons/fa6';
 import CountCard from "../../ui/statisticsUi/CountCard";
 import { hateMessage } from '../../lib/definitions';
 import { useEffect, useState } from 'react';
-import { GetDataStudent } from '../../lib/data';
+import { GetStatistic } from '../../lib/data';
 import Table from '../../components/GTable/Table';
 import { Box, Pagination, Typography, CircularProgress } from '@mui/material';
 
 export default function Statistics() {
-  const [Student, setStudent] = useState([]);
+  const [Data, setData] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
   const [currentPage, setCurrentPage] = useState(1);
   const [totalPages, setTotalPages] = useState(1);
@@ -18,8 +18,9 @@ export default function Statistics() {
 
   const handleApi = async () => {
     setIsLoading(true);
-    const StudentData = await GetDataStudent(currentPage);
-    setStudent(StudentData.data);
+    const StudentData = await GetStatistic
+      (currentPage);
+    setData(StudentData.data);
     setTotalPages(StudentData.pagination.last_page);
     setIsLoading(false);
   };
@@ -39,9 +40,10 @@ export default function Statistics() {
           <div
             className="flex justify-around h-72 -mt-12 z-50 relative gap-6 w-full"
           >
-            <CountCard title="الطلاب" count={1000} Icon={FaUsers} />
-            <CountCard title="الاعلانات" count={1000} Icon={FaUsers} />
-            <CountCard title="فرص العمل" count={1000} Icon={FaUsers} />
+            <CountCard title="الطلاب" count={Data.countStudent} Icon={FaUsers} />
+            <CountCard title="الطلاب  المسجلين" count={Data.countVerifiedStudent} Icon={FaUsers} />
+            <CountCard title="الطلاب غير المسجلين" count={Data.countNotVerifiedStudent} Icon={FaUsers} />
+            <CountCard title="رسائل الكراهية " count={Data.countHateMessage} Icon={FaMessage} />
           </div>
 
           <Typography
@@ -55,7 +57,7 @@ export default function Statistics() {
 
           <Table
             headers={hateMessage}
-            rows={Student}
+            rows={Data.hateMessages}
           />
 
           <Box display="flex" justifyContent="center" mt={2}>

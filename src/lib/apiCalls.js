@@ -12,6 +12,11 @@ export async function GetStudent(page = 1, params = []) {
     `/getStudentNotRegistrationComplete?page=${page}&per_page=10${extract_params(params)}`,
   );
 }
+export async function Statistic(page = 1, params = []) {
+  return Helper.Get(
+    `/Statistic?page=${page}`,
+  );
+}
 
 export async function updateCheckStudent(id, data) {
   return Helper.Put({ url: `/checkStudentData/${id}`, data });

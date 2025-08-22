@@ -4,6 +4,7 @@ import ApplicationRoutes from './routes/route';
 import { Header } from './ui/layout/Header';
 import Hero from './ui/layout/Hero';
 import Sidebar from './ui/layout/SideBar';
+import ProtectedRoute from './routes/ProtectedRoute';
 
 export default function AppContent() {
   const location = useLocation();
@@ -45,13 +46,14 @@ export default function AppContent() {
 
   return (
     <>
+
       {!isLoginPage && (
         <Sidebar isOpen={isSidebarOpen} toggleSidebar={toggleSidebar} />
       )}
       <div className="content h-screen overflow-auto w-[100%] bg-[#f3f4f9]  relative">
-        {!isLoginPage && <Header toggleSidebar={toggleSidebar} />}
-        {!isLoginPage && <Hero />}
-        <ApplicationRoutes />
+          {!isLoginPage && <Header toggleSidebar={toggleSidebar} />}
+          {!isLoginPage && <Hero />}
+          <ApplicationRoutes />
       </div>
     </>
   );

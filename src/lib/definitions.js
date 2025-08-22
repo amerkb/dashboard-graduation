@@ -10,10 +10,10 @@ const requestJoinColumns = [
   { id: 'image', label: 'الصورة', image: true },
 ];
 const hateMessage = [
-  { id: 'id', label: 'المعرف' },
-  { id: 'full_name', label: 'الرسالة' },
-  { id: 'image', label: 'الطالب', image: true },
-  { id: 'university_number', label: ' المجموعة' },
+  { id: 'body', label: 'الرسالة' },
+  { id: 'sender', label: 'الطالب' },
+  { id: 'group', label: ' المجموعة' },
+  { id: 'created_at', label: 'تاريخ رسالة' },
 ];
 
 const navigationItems = [
@@ -26,6 +26,7 @@ const navigationItems = [
 
   {
     icon: <MdOutlineWork />,
+    to: '/jobOpportunities',
     text: 'فرص العمل',
     subItems: [
       { icon: <MdOutlineWork />, text: 'فرص العمل', to: '/jobOpportunities' },
@@ -38,6 +39,7 @@ const navigationItems = [
   },
   {
     icon: <FaBuysellads />,
+    to: '/announcements',
     text: ' الاعلانات',
     subItems: [
       { icon: <FaBuysellads />, text: 'الاعلانات', to: '/announcements' },
@@ -52,6 +54,7 @@ const navigationItems = [
   { static: '   برامج الامتحانات و الدوام ' },
   {
     icon: <MdAccessTimeFilled />,
+    to: '/academicYears',
     text: 'برامج الامتحانات و الدوام',
     subItems: [
       {
@@ -75,6 +78,7 @@ const navigationItems = [
   { static: 'المفقودات' },
   {
     icon: <SiTransmission />,
+    to: '/lostItems',
     text: 'المفقودات',
     subItems: [
       { icon: <SiTransmission />, text: 'إدارة المفقودات', to: '/lostItems' },
@@ -82,4 +86,4 @@ const navigationItems = [
   },
 ];
 
-export { requestJoinColumns, navigationItems,hateMessage };
+export { requestJoinColumns, navigationItems, hateMessage };
