@@ -228,7 +228,7 @@ export default function LostItemsPage() {
                   <CardMedia
                     component="img"
                     sx={{
-                      height: 200,
+                      height: 250,
                       objectFit: "cover",
                     }}
                     image={item.image}

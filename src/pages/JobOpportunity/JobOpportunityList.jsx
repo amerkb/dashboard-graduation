@@ -72,11 +72,13 @@ const JobOpportunityList = () => {
                     <Box sx={{ position: 'relative' }}>
                       <CardMedia
                         component="img"
-                        height="200"
                         image={job.images?.[0]?.image || 'https://via.placeholder.com/300x200?text=Job'}
                         alt={job.title}
-                        sx={{ filter: job.is_expired ? 'grayscale(80%)' : 'none' }}
-                      />
+                        sx={{
+                          height: 250,
+                          objectFit: "cover",
+                          borderTopLeftRadius: 12, borderTopRightRadius: 12
+                        }} />
                       <Box
                         sx={{
                           position: 'absolute',
