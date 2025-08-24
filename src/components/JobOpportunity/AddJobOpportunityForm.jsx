@@ -183,23 +183,18 @@ const JobOpportunityForm = ({ editMode = false, defaultData = null }) => {
   };
 
   return (
-    <Paper
-      elevation={6}
-      sx={{ p: 5, maxWidth: 850, mx: 'auto', my: 5, direction: 'rtl' }}
-    >
+    <div >
       <Typography
         variant="h4"
-        align="center"
         fontWeight="bold"
-        color="primary"
-        gutterBottom
+        className='my-10'
+        sx={{ textShadow: '1px 1px 4px rgba(0, 0, 0, 0.2)' }}
       >
-        {editMode ? '✏️ تعديل فرصة العمل' : '🧾 إضافة فرصة عمل جديدة'}
+        {editMode ? ' تعديل فرصة العمل' : ' إضافة فرصة عمل جديدة'}
       </Typography>
 
-      <Divider sx={{ mb: 4 }} />
 
-      <Box component="form" onSubmit={handleSubmit} noValidate>
+      <Box my={'24px'} component="form" width={3 / 4} mx={'auto'} onSubmit={handleSubmit} noValidate>
         <Stack spacing={3}>
           <TextField
             label="عنوان الفرصة"
@@ -260,16 +255,25 @@ const JobOpportunityForm = ({ editMode = false, defaultData = null }) => {
               </Typography>
             )}
           </FormControl>
+          <Box display="flex" justifyContent="center">
+            <Button
+              variant="contained"
+              component="label"
+              color="primary"
+              startIcon={<AddPhotoAlternateIcon />}
+              sx={{
+                width: '50%',
+                mx: '10px',
+                '& .MuiButton-startIcon': {
+                  mx: 1, // مسافة إضافية يمين الأيقونة
+                },
+              }}
+            >
+              رفع الصور ({images.length})
+              <input hidden multiple type="file" onChange={handleImageChange} />
+            </Button>
 
-          <Button
-            variant="contained"
-            component="label"
-            color="secondary"
-            startIcon={<AddPhotoAlternateIcon />}
-          >
-            رفع الصور ({images.length})
-            <input hidden multiple type="file" onChange={handleImageChange} />
-          </Button>
+          </Box>
 
           <Grid container spacing={2}>
             {existingImages.map((img, idx) => (
@@ -339,22 +343,24 @@ const JobOpportunityForm = ({ editMode = false, defaultData = null }) => {
             ))}
           </Grid>
 
-          <Button
-            type="submit"
-            variant="contained"
-            fullWidth
-            size="large"
-            color="primary"
-            disabled={loading}
-          >
-            {loading
-              ? editMode
-                ? '⏳ جاري تحديث الفرصة...'
-                : '⏳ جاري نشر الفرصة...'
-              : editMode
-                ? '✅ تحديث الفرصة'
-                : '✅ نشر الفرصة'}
-          </Button>
+          <Box display="flex" justifyContent="center">
+            <Button
+              type="submit"
+              variant="contained"
+              color="primary"
+              disabled={loading}
+              sx={{ width: '50%' }}
+            >
+              {loading
+                ? editMode
+                  ? ' جاري تحديث الفرصة...'
+                  : ' جاري نشر الفرصة...'
+                : editMode
+                  ? ' تحديث الفرصة'
+                  : ' نشر الفرصة'}
+            </Button>
+          </Box>
+
         </Stack>
       </Box>
 
@@ -422,7 +428,7 @@ const JobOpportunityForm = ({ editMode = false, defaultData = null }) => {
           {snackbar.message}
         </Alert>
       </Snackbar>
-    </Paper>
+    </div>
   );
 };
 

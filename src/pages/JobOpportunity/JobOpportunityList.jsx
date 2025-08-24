@@ -11,6 +11,8 @@ import {
   Alert,
   Button,
   Chip,
+  CardActionArea,
+  Stack,
 } from '@mui/material';
 import { useNavigate } from 'react-router-dom';
 import { getAllJobOpportunities } from '../../services/jobService';
@@ -37,78 +39,117 @@ const JobOpportunityList = () => {
   }, []);
 
   return (
-    <Container sx={{ mt: 5, direction: 'rtl' }}>
-      <Typography variant="h4" align="center" fontWeight="bold" mb={3}>
+    <div>
+
+      <Typography
+        variant="h4"
+        fontWeight="bold"
+        className='my-10'
+        sx={{ textShadow: '1px 1px 4px rgba(0, 0, 0, 0.2)' }}
+      >
         فرص العمل المتاحة
       </Typography>
-
       {loading ? (
-        <Box display="flex" justifyContent="center" mt={5}>
+        <Box display="flex" justifyContent="center" my={10} p={10}>
           <CircularProgress />
         </Box>
       ) : error ? (
         <Alert severity="error">{error}</Alert>
       ) : (
-        <Grid container spacing={3} justifyContent="center">
-          {jobs.map((job) => (
-            <Grid item key={job.id} xs={12} sm={6} md={4}>
-              <Card
-                sx={{
-                  maxWidth: 345,
-                  boxShadow: 50,
-                  borderRadius: 5,
-                  transition: '0.3s',
-                  '&:hover': { boxShadow: 6 },
-                }}
-              >
-                {job.images?.length > 0 && (
-                  <CardMedia
-                    component="img"
-                    height="180"
-                    image={job.images[0].image}
-                    alt={job.title}
-                  />
-                )}
-                <CardContent>
-                  <Typography variant="h6" align="right" gutterBottom>
-                    {job.title}
-                  </Typography>
+        <Grid container my={'24px'} spacing={3} justifyContent="start">
+          {jobs && jobs.length > 0 ? (
+            jobs.map((job) => (
+              <Grid item key={job.id} xs={12} sm={6} md={4}>
+                <Card
+                  sx={{
+                    borderRadius: 4,
+                    overflow: 'hidden',
+                    transition: 'transform 0.3s ease, box-shadow 0.3s ease',
+                    '&:hover': { transform: 'translateY(-6px)', boxShadow: 6 },
+                  }}
+                >
+                  <CardActionArea onClick={() => navigate(`/jobOpportunity/${job.id}`)}>
+                    <Box sx={{ position: 'relative' }}>
+                      <CardMedia
+                        component="img"
+                        height="200"
+                        image={job.images?.[0]?.image || 'https://via.placeholder.com/300x200?text=Job'}
+                        alt={job.title}
+                        sx={{ filter: job.is_expired ? 'grayscale(80%)' : 'none' }}
+                      />
+                      <Box
+                        sx={{
+                          position: 'absolute',
+                          bottom: 0,
+                          left: 0,
+                          right: 0,
+                          bgcolor: 'rgba(0,0,0,0.5)',
+                          color: 'white',
+                          px: 2,
+                          py: 1,
+                        }}
+                      >
+                        <Typography variant="subtitle1" noWrap>
+                          {job.title}
+                        </Typography>
+                      </Box>
+                    </Box>
 
-                  {job.job_type_name && (
-                    <Chip
-                      label={job.job_type_name}
-                      color="primary"
-                      sx={{ mb: 1 }}
-                    />
-                  )}
+                    <CardContent>
+                      <Stack
+                        direction="row"
+                        spacing={1}
+                        mb={1}
+                        justifyContent="center"
+                        alignItems="center"
+                        gap={4}
+                        flexWrap="wrap"
+                      >
+                        {job.job_type_name && (
+                          <Chip label={job.job_type_name} color="primary" size="small" />
+                        )}
+                        <Chip
+                          label={job.is_expired ? '🔴 منتهية' : '🟢 فعالة'}
+                          color={job.is_expired ? 'error' : 'success'}
+                          size="small"
+                        />
+                      </Stack>
 
-                  <Chip
-                    label={job.is_expired ? '🔴 منتهية' : '🟢 فعالة'}
-                    color={job.is_expired ? 'error' : 'success'}
-                    sx={{ mb: 1 }}
-                  />
+                      <Typography
+                        variant="caption"
+                        display="block"
+                        color="text.secondary"
+                        sx={{ mb: 2 }}
+                      >
+                        {job.created_at}
+                      </Typography>
 
-                  <Typography variant="caption" display="block" align="left">
-                    {job.created_at}
-                  </Typography>
-
-                  <Box mt={2} textAlign="left">
-                    <Button
-                      variant="contained"
-                      size="small"
-                      color="primary"
-                      onClick={() => navigate(`/jobOpportunity/${job.id}`)}
-                    >
-                      عرض التفاصيل
-                    </Button>
-                  </Box>
-                </CardContent>
-              </Card>
+                      <Box textAlign="left">
+                        <Button
+                          variant="outlined"
+                          size="small"
+                          color="primary"
+                          endIcon={<i className="fas fa-arrow-left"></i>}
+                        >
+                          عرض التفاصيل
+                        </Button>
+                      </Box>
+                    </CardContent>
+                  </CardActionArea>
+                </Card>
+              </Grid>
+            ))
+          ) : (
+            <Grid item xs={12}>
+              <Typography variant="h6" align="center" color="text.secondary" sx={{ my: 4 }}>
+                🚫 لا توجد وظائف متاحة حالياً
+              </Typography>
             </Grid>
-          ))}
+          )}
+
         </Grid>
       )}
-    </Container>
+    </div>
   );
 };
 

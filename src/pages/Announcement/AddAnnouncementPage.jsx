@@ -3,9 +3,7 @@ import AddAnnouncementForm from '../../components/Announcement/AddAnnouncementFo
 
 const AddAnnouncementPage = () => {
   return (
-    <div className="p-6">
       <AddAnnouncementForm />
-    </div>
   );
 };
 

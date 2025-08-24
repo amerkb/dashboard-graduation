@@ -3,9 +3,7 @@ import AddJobOpportunityForm from '../../components/JobOpportunity/AddJobOpportu
 
 const AddJobOpportunityPage = () => {
   return (
-    <div className="p-7">
       <AddJobOpportunityForm />
-    </div>
   );
 };
 

@@ -189,28 +189,22 @@ const AddAnnouncementForm = ({ editMode = false, defaultData = null }) => {
   };
 
   return (
-    <Paper
-      elevation={6}
-      sx={{ p: 5, maxWidth: 850, mx: 'auto', mt: 5, direction: 'rtl' }}
-    >
+    <div >
       <Typography
         variant="h4"
-        align="center"
         fontWeight="bold"
-        color="primary"
-        gutterBottom
+        sx={{ textShadow: '1px 1px 4px rgba(0, 0, 0, 0.2)' }}
       >
-        {editMode ? '📝 تعديل الإعلان' : '📝 إضافة إعلان جديد'}
+        {editMode ? ' تعديل الإعلان' : ' إضافة إعلان جديد'}
       </Typography>
 
-      <Divider sx={{ mb: 4 }} />
 
-      <Box component="form" onSubmit={handleSubmit} noValidate>
+      <Box component="form" my={'24px'} onSubmit={handleSubmit} noValidate>
         <Stack spacing={3}>
           <TextField
             fullWidth
             name="title"
-            label="📌 عنوان الإعلان"
+            label=" عنوان الإعلان"
             value={form.title}
             onChange={handleChange}
             error={Boolean(errors.title)}
@@ -222,7 +216,7 @@ const AddAnnouncementForm = ({ editMode = false, defaultData = null }) => {
             multiline
             rows={4}
             name="description"
-            label="📝 وصف الإعلان"
+            label=" وصف الإعلان"
             value={form.description}
             onChange={handleChange}
             error={Boolean(errors.description)}
@@ -257,7 +251,7 @@ const AddAnnouncementForm = ({ editMode = false, defaultData = null }) => {
 
             <Grid item xs={12} md={6}>
               <FormControl fullWidth error={Boolean(errors.specialization)}>
-                <InputLabel>🔧 الاختصاص</InputLabel>
+                <InputLabel> الاختصاص</InputLabel>
                 <Select
                   name="specialization"
                   value={form.specialization}
@@ -277,12 +271,22 @@ const AddAnnouncementForm = ({ editMode = false, defaultData = null }) => {
               </FormControl>
             </Grid>
           </Grid>
-
-          <Button variant="contained" component="label" color="secondary">
-            📷 رفع الصور ({images.length})
-            <input hidden multiple type="file" onChange={handleImageChange} />
-          </Button>
-
+          <Box display="flex" justifyContent="center">
+            <Button
+              variant="contained"
+              component="label"
+              sx={{
+                width: '50%',
+                mx: '10px',
+                '& .MuiButton-startIcon': {
+                  mx: 1, 
+                },
+              }}
+              color="primary">
+              رفع الصور ({images.length})
+              <input hidden multiple type="file" onChange={handleImageChange} />
+            </Button>
+          </Box>
           <Grid container spacing={2}>
             {existingImages.map((img, idx) => (
               <Grid item xs={4} sm={3} md={2} key={`existing-${idx}`}>
@@ -347,23 +351,29 @@ const AddAnnouncementForm = ({ editMode = false, defaultData = null }) => {
               </Grid>
             ))}
           </Grid>
+          <Box display="flex" justifyContent="center">
+            <Button
+              variant="contained"
+              type="submit"
+              color="primary"
+              fullWidth
+              size="large"
+              sx={{
+                width: '50%',
+                mx: '10px',
+              }}
+              disabled={loading}
+            >
+              {loading
+                ? editMode
+                  ? '⏳ جاري تعديل الإعلان...'
+                  : '⏳ جاري نشر الإعلان...'
+                : editMode
+                  ? '💾 تعديل الإعلان'
+                  : '📢 نشر الإعلان'}
+            </Button>
+          </Box>
 
-          <Button
-            variant="contained"
-            type="submit"
-            color="primary"
-            fullWidth
-            size="large"
-            disabled={loading}
-          >
-            {loading
-              ? editMode
-                ? '⏳ جاري تعديل الإعلان...'
-                : '⏳ جاري نشر الإعلان...'
-              : editMode
-                ? '💾 تعديل الإعلان'
-                : '📢 نشر الإعلان'}
-          </Button>
         </Stack>
       </Box>
 
@@ -430,7 +440,7 @@ const AddAnnouncementForm = ({ editMode = false, defaultData = null }) => {
           {snackbar.message}
         </Alert>
       </Snackbar>
-    </Paper>
+    </div>
   );
 };
 

@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import JobOpportunityForm from '../../components/JobOpportunity/AddJobOpportunityForm';
 import { showJobOpportunity } from '../../services/jobService';
+import { Box, CircularProgress } from '@mui/material';
 
 const EditJobOpportunityPage = () => {
   const { id } = useParams();
@@ -44,7 +45,9 @@ const EditJobOpportunityPage = () => {
     fetchData();
   }, [id]);
 
-  if (loading) return null;
+  if (loading) return <Box display="flex" justifyContent="center" my={10} p={10}>
+    <CircularProgress />
+  </Box>;
   if (!job) return null;
 
   return <JobOpportunityForm editMode={true} defaultData={job} />;
