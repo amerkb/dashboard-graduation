@@ -211,7 +211,7 @@ export default function LostItemsPage() {
 
       <Box mt={6}>
         <Typography variant="h5" fontWeight="bold" mb={3} textAlign={'center'}>
-          🧾 قائمة المفقودات
+          قائمة المفقودات
         </Typography>
 
         <Grid container spacing={3}>
@@ -227,10 +227,14 @@ export default function LostItemsPage() {
                 {item.image && (
                   <CardMedia
                     component="img"
-                    height="200"
+                    sx={{
+                      height: 200,
+                      objectFit: "cover",
+                    }}
                     image={item.image}
                     alt={item.title}
                   />
+
                 )}
                 <CardContent>
                   <Typography variant="h6" fontWeight="bold" gutterBottom>
