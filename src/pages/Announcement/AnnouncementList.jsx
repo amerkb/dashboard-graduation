@@ -55,14 +55,14 @@ const AnnouncementList = () => {
       ) : error ? (
         <Alert severity="error">{error}</Alert>
       ) : (
-        <Grid container spacing={4} justifyContent="center">
+        <Grid container spacing={4} my={'24px'} justifyContent="center">
           {announcements.length === 0 ? (
             <Grid item xs={12}>
               <Typography
                 variant="h6"
                 color="text.secondary"
                 align="center"
-                sx={{ mt: 4 ,py:10}}
+                sx={{ mt: 4, py: 10 }}
               >
                 لا يوجد إعلانات متاحة حالياً
               </Typography>
@@ -82,10 +82,12 @@ const AnnouncementList = () => {
                   {announcement.images?.length > 0 && (
                     <CardMedia
                       component="img"
-                      height="180"
-                      image={announcement.images[0].image}
+                      sx={{
+                        height: 250,
+                        objectFit: "cover",
+                         borderTopLeftRadius: 12, borderTopRightRadius: 12 
+                      }} image={announcement.images[0].image}
                       alt={announcement.title}
-                      sx={{ borderTopLeftRadius: 12, borderTopRightRadius: 12 }}
                     />
                   )}
 
