@@ -31,7 +31,7 @@ const SimpleTable = () => {
           <div className="relative w-full px-6 py-8">
             <div className="flex flex-wrap justify-between text-white items-start w-full flex-col">
               <h1 className="text-3xl font-bold text-darkTextColor drop-shadow-md">
-                مرحبًا {user ? user.name : "الزائر"}
+                مرحبًا بك سيد المدير 
               </h1>
               <p className="mt-2 text-lg text-gray-200 drop-shadow-sm">
                 {user

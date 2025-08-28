@@ -6,7 +6,7 @@ export async function updateCheckStudentForm(id) {
     const response = await updateCheckStudent(id);
 
     if ((response.status = 200)) {
-      toast.success('تم تعديل معلومات الموظف بنجاح');
+      toast.success('تم تعديل معلومات الطالب بنجاح');
       return response;
     } else {
       toast.error(response.response.data.errors.map((e) => e));
