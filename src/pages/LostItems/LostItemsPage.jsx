@@ -27,9 +27,11 @@ const FullWidthButton = styled(Button)(({ theme }) => ({
 }));
 
 const ImagePreview = styled('img')(({ theme }) => ({
-  width: '100%',
-  height: 200,
-  objectFit: 'cover',
+  width: 'auto',
+  margin: 'auto',
+  height: 'auto',        
+  maxHeight: 400,         
+  objectFit: 'contain',   
   borderRadius: theme.spacing(1),
   marginTop: theme.spacing(1),
 }));
@@ -179,7 +181,7 @@ export default function LostItemsPage() {
           </Button>
 
           {imagePreview && (
-            <Box mt={2} position="relative">
+            <Box mt={2}  position="relative">
               <ImagePreview src={imagePreview} alt="Preview" />
               <IconButton
                 size="small"
@@ -187,7 +189,7 @@ export default function LostItemsPage() {
                 sx={{
                   position: 'absolute',
                   top: 8,
-                  right: 8,
+                  right: '35%',
                   backgroundColor: '#fff',
                 }}
               >
